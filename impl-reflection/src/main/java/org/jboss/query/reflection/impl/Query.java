@@ -16,6 +16,10 @@
  */
 package org.jboss.query.reflection.impl;
 
+import org.jboss.query.reflection.api.ClassQuery;
+import org.jboss.query.reflection.api.FieldQuery;
+import org.jboss.query.reflection.api.MethodQuery;
+
 /**
  * Query
  *
@@ -26,17 +30,17 @@ public final class Query
 {
    private Query() {}
    
-   public static ReflectionClassQuery forClass()
+   public static ClassQuery forClass()
    {
       return new ReflectionClassQuery();
    }
 
-   public static ReflectionMethodQuery forMethod()
+   public static MethodQuery forMethod()
    {
       return new ReflectionMethodQuery();
    }
 
-   public static ReflectionFieldQuery forField()
+   public static FieldQuery forField()
    {
       return new ReflectionFieldQuery();
    }
