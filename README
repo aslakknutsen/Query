@@ -1,0 +1,16 @@
+Query API 
+
+Defines a Structure for Querying for class metadata
+
+
+Query Impl - Reflection
+
+A Query API impl using the Java Reflection API.
+
+Example:
+
+      Collection<Method> result = Query.forMethod()
+               .withAnnotation(MyAnnotation.class)
+               .withType(MyReturnType.class)
+               .run(MyClass.class);
+
