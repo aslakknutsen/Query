@@ -30,12 +30,12 @@
 		<dependency>
 			<groupId>org.jboss.query</groupId>
 			<artifactId>query-api</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.query</groupId>
 			<artifactId>query-impl</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
