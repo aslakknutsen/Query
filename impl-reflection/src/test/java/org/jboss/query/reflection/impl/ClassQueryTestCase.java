@@ -20,6 +20,7 @@ import static org.jboss.query.reflection.impl.AssertList.containsClassName;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
+import org.jboss.query.reflection.api.Query;
 import org.jboss.query.reflection.impl.test.Loadable;
 import org.jboss.query.reflection.impl.test.QueryTestInterface;
 import org.jboss.query.reflection.impl.test.QueryTestScenario;

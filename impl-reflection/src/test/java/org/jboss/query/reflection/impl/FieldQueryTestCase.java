@@ -21,6 +21,7 @@ import static org.jboss.query.reflection.impl.AssertList.containsFieldName;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
+import org.jboss.query.reflection.api.Query;
 import org.jboss.query.reflection.impl.test.Loadable;
 import org.jboss.query.reflection.impl.test.Testable;
 import org.junit.Assert;

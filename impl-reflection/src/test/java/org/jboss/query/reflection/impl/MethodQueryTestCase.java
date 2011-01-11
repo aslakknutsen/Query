@@ -21,6 +21,7 @@ import static org.jboss.query.reflection.impl.AssertList.containsMethodName;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
+import org.jboss.query.reflection.api.Query;
 import org.jboss.query.reflection.impl.test.Loadable;
 import org.junit.Assert;
 import org.junit.Test;

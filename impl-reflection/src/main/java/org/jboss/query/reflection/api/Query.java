@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.query.reflection.impl;
+package org.jboss.query.reflection.api;
 
-import org.jboss.query.reflection.api.ClassQuery;
-import org.jboss.query.reflection.api.FieldQuery;
-import org.jboss.query.reflection.api.MethodQuery;
+import org.jboss.query.reflection.impl.ReflectionClassQuery;
+import org.jboss.query.reflection.impl.ReflectionFieldQuery;
+import org.jboss.query.reflection.impl.ReflectionMethodQuery;
 
 /**
  * Query
