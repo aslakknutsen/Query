@@ -24,5 +24,8 @@ package org.jboss.query.reflection.impl.test;
  */
 public class QueryTestScenario2 implements QueryTestInterface<String>
 {
+   @SuppressWarnings("unused")
+   @Testable
+   private Integer fieldTree;
 
 }
