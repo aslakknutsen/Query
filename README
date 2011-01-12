@@ -14,3 +14,16 @@ Example:
                .withType(MyReturnType.class)
                .run(MyClass.class);
 
+
+Query Impl - Javassist
+
+A Query API impl using the Javassist API. For use with classes outside a ClassLoader.
+
+Example:
+
+      Collection<Method> result = Query.forMethod()
+               .withAnnotation("org.my.MyAnnotation")
+               .withType("org.my.MyReturnType")
+               .run(ClassPool.getDefault().get("org.my.MyClass"));
+
+
