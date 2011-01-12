@@ -75,6 +75,7 @@
 		<module>api</module>
 		<module>impl</module>
 		<module>impl-reflection</module>
+		<module>impl-javassist</module>
 	</modules>
 
 	<build>
