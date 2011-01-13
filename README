@@ -24,6 +24,6 @@ Example:
       Collection<CtMethod> result = Query.forMethod()
                .withAnnotation("org.my.MyAnnotation")
                .withType("org.my.MyReturnType")
-               .run(ClassPool.getDefault().get("org.my.MyClass"));
+               .run("org.my.MyClass");
 
 
