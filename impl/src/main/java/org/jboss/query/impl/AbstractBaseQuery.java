@@ -16,9 +16,11 @@
  */
 package org.jboss.query.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.jboss.query.api.Annotated;
@@ -83,9 +85,9 @@ public abstract class AbstractBaseQuery<T, INPUT, ANNOTATION, RESULT> implements
     * @see org.jboss.arquillian.impl.query.api.Annotated#withAnnotation(java.lang.Object)
     */
    @Override
-   public T withAnnotation(ANNOTATION annotaton)
+   public T withAnnotation(ANNOTATION annotation)
    {
-      this.annotations.add(annotaton);
+      this.annotations.add(annotation);
       return covarientReturn();
    }
 
@@ -124,8 +126,8 @@ public abstract class AbstractBaseQuery<T, INPUT, ANNOTATION, RESULT> implements
    @Override
    public Collection<RESULT> run(Collection<INPUT> sources)
    {
-      Set<RESULT> targets = new HashSet<RESULT>(); // class
-      Set<RESULT> matches = new HashSet<RESULT>(); // method
+      List<RESULT> targets = new ArrayList<RESULT>(); // class
+      List<RESULT> matches = new ArrayList<RESULT>(); // method
       for(INPUT source : sources)
       {
          targets.addAll(extractAllTargets(source));

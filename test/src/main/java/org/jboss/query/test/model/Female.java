@@ -14,19 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.query.javassist.impl.test;
+package org.jboss.query.test.model;
 
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * QueryTestScenario2
+ * Wild
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-public class QueryTestScenario2 implements QueryTestInterface<String>
-{
-   @SuppressWarnings("unused")
-   @Testable
-   private Integer fieldTree;
+@Inherited
+@Documented
+@Retention(RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+public @interface Female {
 
 }

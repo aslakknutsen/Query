@@ -16,16 +16,13 @@
  */
 package org.jboss.query.javassist.impl;
 
-import static org.jboss.query.javassist.impl.AssertList.containsMethodName;
-
-import java.util.Collection;
+import java.lang.annotation.Annotation;
 
 import javassist.CtMethod;
 
+import org.jboss.query.javassist.api.MethodQuery;
 import org.jboss.query.javassist.api.Query;
-import org.jboss.query.javassist.impl.test.Loadable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.jboss.query.test.AbstractMethodQueryTest;
 
 /**
  * MethodQueryTestCase
@@ -33,18 +30,35 @@ import org.junit.Test;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-public class MethodQueryTestCase extends AbstractTestBase
+public class MethodQueryTestCase extends AbstractMethodQueryTest<CtMethod, String, MethodQuery>
 {
-   @Test
-   public void shouldFindMethodWithTypeAndAnnotation() throws Exception
+   @Override
+   protected MethodQuery createTypeQuery(Class<?> type)
    {
-      Collection<CtMethod> result = run(
-            Query.forMethod()
-               .withAnnotation(Loadable.class.getName())
-               .withType(String.class.getName()));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(1, result.size());
-      Assert.assertTrue(containsMethodName("methodOne", result));
+      return Query.forMethod().withType(type.getName());
+   }
+
+   @Override
+   protected MethodQuery createAnnotationQuery(Class<? extends Annotation> annotation)
+   {
+      return Query.forMethod().withAnnotation(annotation.getName());
+   }
+   
+   @Override
+   protected MethodQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)
+   {
+      return Query.forMethod().withType(type.getName()).withAnnotation(annotation.getName());
+   }
+
+   @Override
+   protected String[] convertInput(Class<?>... inputs)
+   {
+      return TestUtil.convertInput(inputs);
+   }
+
+   @Override
+   protected String extractName(CtMethod obj)
+   {
+      return obj.getName();
    }
 }

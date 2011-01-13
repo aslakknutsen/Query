@@ -47,6 +47,10 @@ public class JavassistMethodQuery
    {
       try
       {
+         for(CtMethod method : pool.get(source).getDeclaredMethods())
+         {
+            System.out.println(method.hashCode()  + " \t" + method.getDeclaringClass().getName() + "." + method.getName() + " -> " + method.getReturnType().getName());
+         }
          return Arrays.asList(pool.get(source).getDeclaredMethods());
       }
       catch (NotFoundException e)

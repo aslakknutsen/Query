@@ -16,15 +16,12 @@
  */
 package org.jboss.query.reflection.impl;
 
-import static org.jboss.query.reflection.impl.AssertList.containsMethodName;
-
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
+import org.jboss.query.reflection.api.MethodQuery;
 import org.jboss.query.reflection.api.Query;
-import org.jboss.query.reflection.impl.test.Loadable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.jboss.query.test.AbstractMethodQueryTest;
 
 /**
  * MethodQueryTestCase
@@ -32,18 +29,35 @@ import org.junit.Test;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-public class MethodQueryTestCase extends AbstractTestBase
+public class MethodQueryTestCase extends AbstractMethodQueryTest<Method, Class<?>, MethodQuery>
 {
-   @Test
-   public void shouldFindMethodWithTypeAndAnnotation() throws Exception
+   @Override
+   protected MethodQuery createTypeQuery(Class<?> type)
    {
-      Collection<Method> result = run(
-            Query.forMethod()
-               .withAnnotation(Loadable.class)
-               .withType(String.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(1, result.size());
-      Assert.assertTrue(containsMethodName("methodOne", result));
+      return Query.forMethod().withType(type);
+   }
+
+   @Override
+   protected MethodQuery createAnnotationQuery(Class<? extends Annotation> annotation)
+   {
+      return Query.forMethod().withAnnotation(annotation);
+   }
+   
+   @Override
+   protected MethodQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)
+   {
+      return Query.forMethod().withType(type).withAnnotation(annotation);
+   }
+
+   @Override
+   protected Class<?>[] convertInput(Class<?>... inputs)
+   {
+      return inputs;
+   }
+
+   @Override
+   protected String extractName(Method obj)
+   {
+      return obj.getName();
    }
 }

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.query.reflection.impl.test;
+package org.jboss.query.test.model;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -25,7 +25,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * TestAnnotation
+ * Wild
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
@@ -34,7 +34,6 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
-public @interface Testable {
+public @interface Male {
 
-   String value() default "";
 }

@@ -14,27 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.query.reflection.impl.test;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+package org.jboss.query.test.model;
 
 /**
- * TestAnnotation
+ * Dog
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-@Inherited
-@Documented
-@Retention(RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
-public @interface Loadable {
+@TamedAnimal
+public class Dog implements Animal
+{
+   @Female
+   private Dog mother;
+   
+   @Male
+   private Dog father;
+   
+   @Female @Override
+   public Dog getMother()
+   {
+      return mother;
+   }
 
-   String value() default "";
+   @Override
+   public void setMother(Animal mother)
+   {
+   }
+   
+   @Male @Override
+   public Dog getFather()
+   {
+      return father;
+   }
+
+   @Override
+   public void setFather(Animal father)
+   {
+   }
 }

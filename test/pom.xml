@@ -14,17 +14,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Artifact Configuration -->
-	<artifactId>query-impl-javassist</artifactId>
-	<name>Query Impl Javassist</name>
-	<description>Query Impl Javassist</description>
+	<artifactId>query-test</artifactId>
+	<name>Query Test</name>
+	<description>Query Common test</description>
 
 
 	<!-- Properties -->
 	<properties>
 
 		<!-- Versioning -->
-		<version.javassist>3.9.0.GA</version.javassist>
-		
+
 	</properties>
 
 	<dependencies>
@@ -34,26 +33,8 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.query</groupId>
-			<artifactId>query-impl</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>${version.javassist}</version>
-		</dependency>
-
-	<!-- Test -->
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.query</groupId>
-			<artifactId>query-test</artifactId>
-			<version>${project.parent.version}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

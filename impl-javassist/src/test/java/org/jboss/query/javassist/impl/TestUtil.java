@@ -14,16 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.query.javassist.impl.test;
+package org.jboss.query.javassist.impl;
 
 /**
- * QueryTestInterface
+ * TestUtil
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
- * @param <T>
  */
-public interface QueryTestInterface<T>
+final class TestUtil
 {
+   private TestUtil() { }
    
+   public static String[] convertInput(Class<?>... inputs)
+   {
+      String[] result = new String[inputs.length];
+      for(int i = 0; i < inputs.length; i++)
+      {
+         result[i] = inputs[i].getName();
+      }
+      return result;
+   }
+
 }

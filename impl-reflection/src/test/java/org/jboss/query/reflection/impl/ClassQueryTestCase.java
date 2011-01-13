@@ -16,18 +16,11 @@
  */
 package org.jboss.query.reflection.impl;
 
-import static org.jboss.query.reflection.impl.AssertList.containsClassName;
-import java.lang.reflect.Method;
-import java.util.Collection;
+import java.lang.annotation.Annotation;
 
+import org.jboss.query.reflection.api.ClassQuery;
 import org.jboss.query.reflection.api.Query;
-import org.jboss.query.reflection.impl.test.Loadable;
-import org.jboss.query.reflection.impl.test.QueryTestInterface;
-import org.jboss.query.reflection.impl.test.QueryTestScenario;
-import org.jboss.query.reflection.impl.test.QueryTestScenario2;
-import org.jboss.query.reflection.impl.test.Testable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.jboss.query.test.AbstractClassQueryTest;
 
 /**
  * ClassQueryTestCase
@@ -35,61 +28,35 @@ import org.junit.Test;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-public class ClassQueryTestCase extends AbstractTestBase
+public class ClassQueryTestCase extends AbstractClassQueryTest<Class<?>, Class<?>, ClassQuery>
 {
-   /**
-    * Should only return concrete classes, interfaces are ignored in type check
-    */
-   @Test
-   public void shouldFindClassWithType() throws Exception
+   @Override
+   protected ClassQuery createTypeQuery(Class<?> type)
    {
-      Collection<Class<?>> result = run(
-            Query.forClass()
-               .withType(QueryTestInterface.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(2, result.size());
-      Assert.assertTrue(containsClassName("QueryTestScenario", result));
-      Assert.assertTrue(containsClassName("QueryTestScenario2", result));
+      return Query.forClass().withType(type);
+   }
+
+   @Override
+   protected ClassQuery createAnnotationQuery(Class<? extends Annotation> annotation)
+   {
+      return Query.forClass().withAnnotation(annotation);
    }
    
-   @Test
-   public void shouldFindClassWithTypeAndAnnotation() throws Exception
+   @Override
+   protected ClassQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)
    {
-      Collection<Class<?>> result = run( 
-         Query.forClass()
-               .withAnnotation(Testable.class)
-               .withType(QueryTestInterface.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(1, result.size());
-      Assert.assertTrue(containsClassName("QueryTestScenario", result));
+      return Query.forClass().withType(type).withAnnotation(annotation);
    }
 
-   @Test
-   public void shouldFindClassWithTypeGenericType() throws Exception
+   @Override
+   protected Class<?>[] convertInput(Class<?>... inputs)
    {
-      Collection<Class<?>> result = run(
-            Query.forClass()
-               .withGenericType(String.class)
-               .withType(QueryTestInterface.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(1, result.size());
-      Assert.assertTrue(containsClassName("QueryTestScenario2", result));
+      return inputs;
    }
 
-   @Test
-   public void shouldFindMethodsWithinAClassQuery() throws Exception
+   @Override
+   protected String extractName(Class<?> obj)
    {
-      Collection<Method> result = Query.forMethod()
-         .withAnnotation(Loadable.class)
-         .run(
-            Query.forClass()
-               .withAnnotation(Testable.class)
-               .run(QueryTestScenario.class, QueryTestScenario2.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(2, result.size());
+      return obj.getName();
    }
 }

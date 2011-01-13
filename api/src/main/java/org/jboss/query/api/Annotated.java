@@ -26,6 +26,6 @@ package org.jboss.query.api;
 public interface Annotated<T, X> 
 {
 
-   T withAnnotation(X annotaton);
+   T withAnnotation(X annotation);
    
 }

@@ -16,16 +16,12 @@
  */
 package org.jboss.query.reflection.impl;
 
-import static org.jboss.query.reflection.impl.AssertList.containsFieldName;
-
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Collection;
 
+import org.jboss.query.reflection.api.FieldQuery;
 import org.jboss.query.reflection.api.Query;
-import org.jboss.query.reflection.impl.test.Loadable;
-import org.jboss.query.reflection.impl.test.Testable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.jboss.query.test.AbstractFieldQueryTest;
 
 /**
  * FieldQueryTestCase
@@ -33,31 +29,35 @@ import org.junit.Test;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-public class FieldQueryTestCase extends AbstractTestBase
+public class FieldQueryTestCase extends AbstractFieldQueryTest<Field, Class<?>, FieldQuery>
 {
-   @Test
-   public void shouldFindFieldsWithAnnotation() throws Exception
+   @Override
+   protected FieldQuery createTypeQuery(Class<?> type)
    {
-      Collection<Field> result = run(
-            Query.forField()
-               .withAnnotation(Loadable.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(2, result.size());
-      Assert.assertTrue(containsFieldName("fieldOne", result));
-      Assert.assertTrue(containsFieldName("fieldTwo", result));
+      return Query.forField().withType(type);
    }
 
-   @Test
-   public void shouldFindFieldWithTypeAndAnnotation() throws Exception
+   @Override
+   protected FieldQuery createAnnotationQuery(Class<? extends Annotation> annotation)
    {
-      Collection<Field> result = run(
-            Query.forField()
-               .withAnnotation(Testable.class)
-               .withType(String.class));
-      
-      Assert.assertNotNull(result);
-      Assert.assertEquals(1, result.size());
-      Assert.assertTrue(containsFieldName("fieldOne", result));
+      return Query.forField().withAnnotation(annotation);
+   }
+   
+   @Override
+   protected FieldQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)
+   {
+      return Query.forField().withType(type).withAnnotation(annotation);
+   }
+
+   @Override
+   protected Class<?>[] convertInput(Class<?>... inputs) 
+   {
+      return inputs;
+   }
+   
+   @Override
+   protected String extractName(Field obj)
+   {
+      return obj.getName();
    }
 }
