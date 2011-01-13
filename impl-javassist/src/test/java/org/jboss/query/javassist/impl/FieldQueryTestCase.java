@@ -53,7 +53,7 @@ public class FieldQueryTestCase extends AbstractFieldQueryTest<CtField, String, 
    @Override
    protected String[] convertInput(Class<?>... inputs)
    {
-      return TestUtil.convertInput(inputs);
+      return ConvertUtil.convertInput(inputs);
    }
 
    @Override

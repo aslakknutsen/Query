@@ -53,7 +53,7 @@ public class MethodQueryTestCase extends AbstractMethodQueryTest<CtMethod, Strin
    @Override
    protected String[] convertInput(Class<?>... inputs)
    {
-      return TestUtil.convertInput(inputs);
+      return ConvertUtil.convertInput(inputs);
    }
 
    @Override

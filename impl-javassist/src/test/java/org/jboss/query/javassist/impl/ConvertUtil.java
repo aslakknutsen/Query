@@ -22,9 +22,9 @@ package org.jboss.query.javassist.impl;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-final class TestUtil
+final class ConvertUtil
 {
-   private TestUtil() { }
+   private ConvertUtil() { }
    
    public static String[] convertInput(Class<?>... inputs)
    {
