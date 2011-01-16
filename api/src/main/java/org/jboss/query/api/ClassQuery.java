@@ -29,7 +29,8 @@ public interface ClassQuery<T, CLASS, ANNOTATION, RESULT> extends
          Executable<RESULT, CLASS>, 
          Annotated<T, ANNOTATION>, 
          Typed<T, CLASS>, 
-         Generic<T, CLASS>
+         Generic<T, CLASS>,
+         Named<T>
 {
 
 }

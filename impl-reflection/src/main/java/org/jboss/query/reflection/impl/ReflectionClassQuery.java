@@ -53,10 +53,16 @@ public class ReflectionClassQuery
    @Override
    protected boolean match(Class<?> target)
    {
-      if(!QueryUtil.matchAnnotations(target, getAnnotations()))
+      // Named
+      if(getNameExpression() != null)
       {
-         return false;
+         if(!target.getName().matches(getNameExpression()))
+         {
+            return false;
+         }
       }
+
+      // Typed
       if(getType() != null)
       {
          if(!getType().isAssignableFrom(target) || target.isInterface())
@@ -64,6 +70,14 @@ public class ReflectionClassQuery
             return false;
          }
       }
+      
+      // Annotated
+      if(!QueryUtil.matchAnnotations(target, getAnnotations()))
+      {
+         return false;
+      }
+      
+      // Generic
       if(getGenericTypes().size() > 0 && getGenericTypes().size() != target.getGenericInterfaces().length)
       {
          return false;

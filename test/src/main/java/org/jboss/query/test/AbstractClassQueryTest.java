@@ -46,6 +46,12 @@ public abstract class AbstractClassQueryTest<RESULT, INPUT, QUERY extends ClassQ
       validate(createAnnotationQuery(WildAnimal.class), Cat.class.getName());
    }
 
+   @Test
+   public void shouldMatchOnName() throws Exception
+   {
+      validate(createNameQuery(".*at"), Cat.class.getName());
+   }
+   
    @Test 
    public void shouldMatchOnTypeAndAnnotation() throws Exception
    {
@@ -55,6 +61,8 @@ public abstract class AbstractClassQueryTest<RESULT, INPUT, QUERY extends ClassQ
    protected abstract QUERY createTypeQuery(Class<?> type);
    
    protected abstract QUERY createAnnotationQuery(Class<? extends Annotation> annotation);
+
+   protected abstract QUERY createNameQuery(String expression);
    
    protected abstract QUERY createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation);
 }

@@ -66,24 +66,36 @@ public class JavassistClassQuery
    {
       try
       {
+         // Generic
          if(getGenericTypes().size() > 0)
          {
             throw new UnsupportedOperationException("GenericTypes not supported by Javassist");
          }
-         
-         if(!QueryUtil.matchAnnotations(
-               getAnnotations(), 
-               (AnnotationsAttribute)target.getClassFile2().getAttribute(AnnotationsAttribute.visibleTag)))
+
+         // Named
+         if(getNameExpression() != null)
          {
-            return false;
+            if(!target.getName().matches(getNameExpression()))
+            {
+               return false;
+            }
          }
          
+         // Typed
          if(getType() != null)
          {
             if(target.isInterface() || !target.subtypeOf(pool.get(getType())))
             {
                return false;
             }
+         }
+
+         // Annotated
+         if(!QueryUtil.matchAnnotations(
+               getAnnotations(), 
+               (AnnotationsAttribute)target.getClassFile2().getAttribute(AnnotationsAttribute.visibleTag)))
+         {
+            return false;
          }
       }
       catch (NotFoundException e) 

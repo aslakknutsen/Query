@@ -45,6 +45,12 @@ public class ClassQueryTestCase extends AbstractClassQueryTest<CtClass, String, 
    }
 
    @Override
+   protected ClassQuery createNameQuery(String expression)
+   {
+      return Query.forClass().withName(expression);
+   }
+
+   @Override
    protected ClassQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)
    {
       return Query.forClass().withType(type.getName()).withAnnotation(annotation.getName());
