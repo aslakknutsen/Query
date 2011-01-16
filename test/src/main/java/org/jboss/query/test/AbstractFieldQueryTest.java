@@ -44,6 +44,12 @@ public abstract class AbstractFieldQueryTest<RESULT, INPUT, QUERY extends FieldQ
       validate(createAnnotationQuery(Female.class), "mother", "mother");
    }
 
+   @Test
+   public void shouldMatchOnName() throws Exception
+   {
+      validate(createNameQuery("mo.*"), "mother", "mother");
+   }
+
    @Test 
    public void shouldMatchOnTypeAndAnnotation() throws Exception
    {
@@ -53,6 +59,8 @@ public abstract class AbstractFieldQueryTest<RESULT, INPUT, QUERY extends FieldQ
    protected abstract QUERY createTypeQuery(Class<?> type);
    
    protected abstract QUERY createAnnotationQuery(Class<? extends Annotation> annotation);
-   
+
+   protected abstract QUERY createNameQuery(String expression);
+
    protected abstract QUERY createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation);
 }

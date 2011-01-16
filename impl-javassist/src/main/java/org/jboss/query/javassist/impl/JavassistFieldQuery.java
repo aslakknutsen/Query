@@ -63,13 +63,16 @@ public class JavassistFieldQuery
    {
       try
       {
-         if(!QueryUtil.matchAnnotations(
-               getAnnotations(), 
-               (AnnotationsAttribute)target.getFieldInfo2().getAttribute(AnnotationsAttribute.visibleTag)))
+         // Named
+         if(getNameExpression() != null)
          {
-            return false;
+            if(!target.getName().matches(getNameExpression()))
+            {
+               return false;
+            }
          }
-         
+
+         // Typed
          if(getType() != null)
          {
             if(!target.getType().getName().equals(getType()))
@@ -77,6 +80,15 @@ public class JavassistFieldQuery
                return false;
             }
          }
+
+         // Annotated
+         if(!QueryUtil.matchAnnotations(
+               getAnnotations(), 
+               (AnnotationsAttribute)target.getFieldInfo2().getAttribute(AnnotationsAttribute.visibleTag)))
+         {
+            return false;
+         }
+         
       }
       catch (Exception e) 
       {

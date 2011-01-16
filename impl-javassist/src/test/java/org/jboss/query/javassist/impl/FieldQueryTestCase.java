@@ -43,7 +43,13 @@ public class FieldQueryTestCase extends AbstractFieldQueryTest<CtField, String, 
    {
       return Query.forField().withAnnotation(annotation.getName());
    }
-   
+
+   @Override
+   protected FieldQuery createNameQuery(String expression)
+   {
+      return Query.forField().withName(expression);
+   }
+
    @Override
    protected FieldQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)
    {

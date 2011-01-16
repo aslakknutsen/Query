@@ -49,16 +49,28 @@ public class ReflectionFieldQuery
    @Override
    protected boolean match(Field target)
    {
-      if(!QueryUtil.matchAnnotations(target, getAnnotations()))
+      // Named
+      if(getNameExpression() != null)
       {
-         return false;
+         if(!target.getName().matches(getNameExpression()))
+         {
+            return false;
+         }
       }
+
+      // Typed
       if(getType() != null)
       {
          if(!target.getType().equals(getType()))
          {
             return false;
          }
+      }
+
+      // Annotated
+      if(!QueryUtil.matchAnnotations(target, getAnnotations()))
+      {
+         return false;
       }
       return true;
    }

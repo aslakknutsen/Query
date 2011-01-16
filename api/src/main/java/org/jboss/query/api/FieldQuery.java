@@ -25,7 +25,8 @@ package org.jboss.query.api;
 public interface FieldQuery<T, INPUT, ANNOTATION, RESULT> extends
          Executable<RESULT, INPUT>, 
          Annotated<T, ANNOTATION>, 
-         Typed<T, INPUT> 
+         Typed<T, INPUT>,
+         Named<T>
 {
 
 }
