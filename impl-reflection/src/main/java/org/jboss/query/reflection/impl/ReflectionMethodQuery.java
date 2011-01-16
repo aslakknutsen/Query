@@ -49,10 +49,16 @@ public class ReflectionMethodQuery
    @Override
    protected boolean match(Method target)
    {
-      if(!QueryUtil.matchAnnotations(target, getAnnotations()))
+      // Named
+      if(getNameExpression() != null)
       {
-         return false;
+         if(!target.getName().matches(getNameExpression()))
+         {
+            return false;
+         }
       }
+      
+      // Typed
       if(getType() != null)
       {
          if(!target.getReturnType().equals(getType()))
@@ -60,6 +66,14 @@ public class ReflectionMethodQuery
             return false;
          }
       }
+      
+      // Annotated
+      if(!QueryUtil.matchAnnotations(target, getAnnotations()))
+      {
+         return false;
+      }
+      
+      // Parameterized
       if(getParameterTypes().size() > 0 && getParameterTypes().size() != target.getParameterTypes().length)
       {
          return false;

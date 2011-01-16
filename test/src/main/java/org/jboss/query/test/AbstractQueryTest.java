@@ -44,11 +44,37 @@ public abstract class AbstractQueryTest<RESULT, INPUT, QUERY extends Executable<
    
    protected abstract String extractName(RESULT obj);
    
-   protected final void validate(QUERY query, String... expectedResults)
+   protected String extractDescription(RESULT obj) 
    {
-      assertContains(run(query), expectedResults);
+      return obj.toString();
    }
    
+   protected final void validate(QUERY query, String... expectedResults)
+   {
+      Collection<RESULT> result = run(query);
+      try
+      { 
+         assertContains(result, expectedResults);
+      }
+      catch (AssertionError e) 
+      {
+         print(result);
+         throw e;
+      }
+   }
+   
+   /**
+    * @param result
+    */
+   private void print(Collection<RESULT> results)
+   {
+      System.err.println("Query returned:");
+      for(String result : convertDescriptiveResult(results))
+      {
+         System.err.println("\t" + result);
+      }
+   }
+
    private Collection<RESULT> run(QUERY query)
    {
       return query.run(
@@ -61,7 +87,7 @@ public abstract class AbstractQueryTest<RESULT, INPUT, QUERY extends Executable<
       if(result == null) { Assert.fail("Result returned null"); }
       
       Assert.assertEquals(
-            "Verify expected return size", 
+            "Verify expected result size", 
             names.length, 
             result.size());
       
@@ -80,6 +106,16 @@ public abstract class AbstractQueryTest<RESULT, INPUT, QUERY extends Executable<
       for(RESULT input: inputs)
       {
          output.add(extractName(input));
+      }
+      return output;
+   }
+
+   private Collection<String> convertDescriptiveResult(Collection<RESULT> inputs)
+   {
+      Collection<String> output = new ArrayList<String>();
+      for(RESULT input: inputs)
+      {
+         output.add(extractDescription(input));
       }
       return output;
    }

@@ -26,6 +26,7 @@ import java.util.Set;
 import org.jboss.query.api.Annotated;
 import org.jboss.query.api.Executable;
 import org.jboss.query.api.Generic;
+import org.jboss.query.api.Named;
 import org.jboss.query.api.Parameterized;
 import org.jboss.query.api.Typed;
 
@@ -40,12 +41,14 @@ public abstract class AbstractBaseQuery<T, INPUT, ANNOTATION, RESULT> implements
          Annotated<T, ANNOTATION>, 
          Typed<T, INPUT>, 
          Parameterized<T, INPUT>,
-         Generic<T, INPUT>
+         Generic<T, INPUT>,
+         Named<T>
 {
    private Set<INPUT> genericTypes = null;
    private Set<INPUT> parameterTypes = null;
    private Set<ANNOTATION> annotations = null;
    private INPUT type = null;
+   private String nameExpression;
    
    public AbstractBaseQuery()
    {
@@ -91,6 +94,16 @@ public abstract class AbstractBaseQuery<T, INPUT, ANNOTATION, RESULT> implements
       return covarientReturn();
    }
 
+   /* (non-Javadoc)
+    * @see org.jboss.query.api.Named#withName(java.lang.String)
+    */
+   @Override
+   public T withName(String expression)
+   {
+      this.nameExpression = expression;
+      return covarientReturn();
+   }
+   
    protected Set<ANNOTATION> getAnnotations()
    {
       return annotations;
@@ -109,6 +122,14 @@ public abstract class AbstractBaseQuery<T, INPUT, ANNOTATION, RESULT> implements
    protected INPUT getType()
    {
       return type;
+   }
+   
+   /**
+    * @return the nameExpression
+    */
+   public String getNameExpression()
+   {
+      return nameExpression;
    }
    
    /* (non-Javadoc)

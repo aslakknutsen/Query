@@ -43,6 +43,12 @@ public class MethodQueryTestCase extends AbstractMethodQueryTest<CtMethod, Strin
    {
       return Query.forMethod().withAnnotation(annotation.getName());
    }
+
+   @Override
+   protected MethodQuery createNameQuery(String expression)
+   {
+      return Query.forMethod().withName(expression);
+   }
    
    @Override
    protected MethodQuery createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation)

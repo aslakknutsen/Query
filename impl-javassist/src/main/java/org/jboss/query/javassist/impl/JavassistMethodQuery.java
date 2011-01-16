@@ -63,18 +63,30 @@ public class JavassistMethodQuery
    {
       try
       {
-         if(!QueryUtil.matchAnnotations(
-               getAnnotations(), 
-               (AnnotationsAttribute)target.getMethodInfo2().getAttribute(AnnotationsAttribute.visibleTag)))
+         // Named
+         if(getNameExpression() != null)
          {
-            return false;
+            if(!target.getName().matches(getNameExpression()))
+            {
+               return false;
+            }
          }
+
+         // Typed
          if(getType() != null)
          {
             if(!target.getReturnType().getName().equals(getType()))
             {
                return false;
             }
+         }
+         
+         // Annotated
+         if(!QueryUtil.matchAnnotations(
+               getAnnotations(), 
+               (AnnotationsAttribute)target.getMethodInfo2().getAttribute(AnnotationsAttribute.visibleTag)))
+         {
+            return false;
          }
       }
       catch (NotFoundException e)

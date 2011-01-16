@@ -17,20 +17,14 @@
 package org.jboss.query.api;
 
 /**
- * MethodQuery
+ * Named
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
- * @param <T> Return type
- * @param <X> Input type
- * @param <Y> Query result type
  */
-public interface MethodQuery<T, INPUT, ANNOTATION, RESULT> extends 
-         Executable<RESULT, INPUT>, 
-         Annotated<T, ANNOTATION>, 
-         Typed<T, INPUT>, 
-         Parameterized<T, INPUT>,
-         Named<T>
+public interface Named<T>
 {
-
+   
+   T withName(String expression);
+   
 }

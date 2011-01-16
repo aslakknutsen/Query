@@ -43,6 +43,12 @@ public abstract class AbstractMethodQueryTest<RESULT, INPUT, QUERY extends Metho
    {
       validate(createAnnotationQuery(Female.class), "getMother", "getMother");
    }
+
+   @Test
+   public void shouldMatchOnName() throws Exception
+   {
+      validate(createNameQuery("mj.*"), "mjau");
+   }
    
    @Test 
    public void shouldMatchOnTypeAndAnnotation() throws Exception
@@ -50,9 +56,12 @@ public abstract class AbstractMethodQueryTest<RESULT, INPUT, QUERY extends Metho
       validate(createTypeAndAnnotationQuery(Cat.class, Female.class), "getMother");
    }
    
+   
    protected abstract QUERY createTypeQuery(Class<?> type);
    
    protected abstract QUERY createAnnotationQuery(Class<? extends Annotation> annotation);
+   
+   protected abstract QUERY createNameQuery(String expression);
    
    protected abstract QUERY createTypeAndAnnotationQuery(Class<?> type, Class<? extends Annotation> annotation);
 }

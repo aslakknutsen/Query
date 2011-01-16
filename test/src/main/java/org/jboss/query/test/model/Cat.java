@@ -52,4 +52,9 @@ public class Cat implements Animal
    public void setFather(Animal father)
    {
    }
+   
+   public void mjau()
+   {
+      
+   }
 }
